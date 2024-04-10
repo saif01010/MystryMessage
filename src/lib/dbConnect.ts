@@ -1,4 +1,3 @@
-import { log } from "console";
 import mongoose from "mongoose";
 
 type connectionObject = {
@@ -16,7 +15,10 @@ async function dbConnect() {
     }
 
    try {
-     const db = await mongoose.connect(process.env.MONGO_URI || " ");
+    console.log("Using new connection");
+    console.log(process.env.MONGO_URI);
+    
+     const db = await mongoose.connect(process.env.MONGO_URI as string);
  
      connection.isConnected = db.connections[0].readyState;
      console.log("Connected to MongoDB");
