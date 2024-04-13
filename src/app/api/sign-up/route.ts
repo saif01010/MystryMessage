@@ -4,11 +4,19 @@ import dbConnect from "@/lib/dbConnect";
 import bycrypt from "bcryptjs";
 import { use } from "react";
 
+interface userValidation {
+    email: string;
+    username: string;
+    password: string;
+
+}
 export async function POST (req:Request,res:Response){
     await dbConnect();
-   
+    
     try {
-      const {email,username,password} = await req.json();
+      const {email,username,password}:any=  await req.json();
+      console.log(email,username,password);
+      
 
       const userByUsername = await UserModel.findOne({username,isVarified:true});
       if(userByUsername){
