@@ -70,7 +70,8 @@ export async function POST (req:Request,res:Response){
             { status: 400 }
           );
       }
-
+      console.log(emailResponse.message);
+      
         return Response.json(
             {
               success: true,
