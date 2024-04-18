@@ -3,16 +3,16 @@ import { sendEmailToken } from "@/helpers/sendEmailToken";
 import dbConnect from "@/lib/dbConnect";
 import bycrypt from "bcryptjs";
 
-interface userValidation {
-  email: string;
-  username: string;
-  password: string;
-}
+// interface userValidation {
+//   email: string;
+//   username: string;
+//   password: string;
+// }
 export async function POST(req: Request, res: Response) {
   await dbConnect();
 
   try {
-    const { email, username, password }: any = await req.json();
+    const { email, username, password } = await req.json();
     console.log(email, username, password);
 
     const userByUsername = await UserModel.findOne({
