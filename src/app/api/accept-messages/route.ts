@@ -2,8 +2,7 @@ import { getServerSession, User } from "next-auth";
 import dbConnect from "@/lib/dbConnect";
 import { authOptions } from "../auth/[...nextauth]/options";
 import UserModel from "@/models/user.model";
-
-
+import mongoose from "mongoose";
 
 export async function POST(req: Request, res: Response) {
     await dbConnect();
@@ -13,7 +12,7 @@ export async function POST(req: Request, res: Response) {
     if(!user){
         return Response.json({success:false,message:'User not found'},{status:400})
     }
-    const userId = user._id;
+    const userId = new mongoose.Types.ObjectId(user._id);
     try {
         const {acceptingMessages} = await req.json();
         const existUser = await UserModel.findByIdAndUpdate(userId,
