@@ -8,4 +8,5 @@ declare module "next-auth" {
         email?: string;
         isAcceptingMessages?: boolean;
     }
+    
 }
