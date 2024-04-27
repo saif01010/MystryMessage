@@ -4,7 +4,7 @@ import { getToken } from 'next-auth/jwt';
 
 
 export const config = {
-    matcher:['/dashboard/:path*',  '/sign-up', '/', '/verify/:path*']
+    matcher:['/dashboard/:path*', '/', '/verify/:path*']
 }
 export async function middleware(req: NextRequest, res: NextResponse) {
   const token = await getToken({ req , secret: process.env.NEXTAUTH_SECRET});
