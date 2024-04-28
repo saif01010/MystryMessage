@@ -16,7 +16,7 @@ async function dbConnect() {
 
    try {
     console.log("Using new connection");
-    console.log(process.env.MONGO_URI);
+    // console.log(process.env.MONGO_URI);
     
      const db = await mongoose.connect(process.env.MONGO_URI as string);
 

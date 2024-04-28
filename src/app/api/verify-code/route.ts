@@ -6,6 +6,7 @@ export async function POST(req:Request){
     try {
         const {username,code} = await req.json();
         const decodedUsername = decodeURIComponent(username)
+        console.log(code)
         const user = await UserModel.findOne({username:decodedUsername})
         if(!user){
             return Response.json({success:false,message:'Invalid Username'},{status:400})

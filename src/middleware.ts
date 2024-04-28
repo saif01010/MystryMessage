@@ -4,14 +4,14 @@ import { getToken } from 'next-auth/jwt';
 
 
 export const config = {
-    matcher:['/dashboard/:path*', '/', '/verify/:path*']
+    matcher:['/dashboard/:path*', '/', ]
 }
 export async function middleware(req: NextRequest, res: NextResponse) {
   const token = await getToken({ req , secret: process.env.NEXTAUTH_SECRET});
   const url = req.nextUrl;
   if (token && (url.pathname.startsWith('sing-in') ||
    url.pathname.startsWith('sign-up')||
-   url.pathname.startsWith('verify')||
+   
    url.pathname.startsWith('/'))) {
     return NextResponse.redirect(new URL('/dashboard', req.url));
   }

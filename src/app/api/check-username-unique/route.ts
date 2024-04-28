@@ -12,6 +12,7 @@ export  async function GET(req:Request){
     try {
         const {searchParams} = new URL(req.url); 
         const queryParams = {username:searchParams.get('username')};
+        console.log(queryParams)
 
         const result = usernameSchema.safeParse(queryParams);
         console.log(result)
