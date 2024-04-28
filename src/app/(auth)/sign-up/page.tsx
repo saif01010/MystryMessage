@@ -1,6 +1,12 @@
 'use client'
 import React, { use, useEffect, useState } from 'react'
 import {zodResolver} from '@hookform/resolvers/zod'
+import { Form, 
+         FormControl,
+         FormField,
+         FormItem,
+         FormLabel,
+         FormMessage } from '@/components/ui/form'
 import { useDebounce } from 'use-debounce';
 import {useRouter} from 'next/navigation'
 import {useToast} from '@/components/ui/use-toast'
@@ -9,7 +15,6 @@ import { signUpSchema } from '@/schemas/signUpSchema'
 import  {useForm} from 'react-hook-form'
 import axios ,{AxiosError}from 'axios'
 import {ApiResponse} from '@/types/ApiResponse'
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
@@ -37,7 +42,8 @@ const SignUpPage = () => {
         setUsernameMessage('')
       }
       try {
-        const response = await axios.get(`/api/auth/check-username-unique?username=${debouncedUsername}`)
+        const response = await axios.get(`api/check-username-unique?username=${debouncedUsername}`)
+        console.log(response)
         setUsernameMessage(response.data.message);
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>;
@@ -101,7 +107,7 @@ const SignUpPage = () => {
               {!isCheakingUsername && usernameMessage && (
                 <p
                 className={`text-sm ${
-                  usernameMessage === 'Username is unique'
+                  usernameMessage === 'Username is available'
                     ? 'text-green-500'
                     : 'text-red-500'
                 }`}
