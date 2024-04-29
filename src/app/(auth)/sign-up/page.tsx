@@ -37,6 +37,10 @@ const SignUpPage = () => {
     })
     useEffect(()=>{
     const checkUsername= async ()=>{
+      if(username === ''){
+        setUsernameMessage('')
+        return
+      }
       if(debouncedUsername){
         setIsCheakingUsername(true)
         setUsernameMessage('')
