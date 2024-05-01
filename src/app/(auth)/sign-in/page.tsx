@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
+
 const LoginPage = () => {
     const router = useRouter()
     const {toast} = useToast()
@@ -28,7 +29,7 @@ const LoginPage = () => {
               identifier: data.identifier,
               password: data.password
       });
-      console.log(result)
+      // console.log(result)
       if(result?.error){
         toast({
           title: 'Sign in failed',
@@ -37,6 +38,11 @@ const LoginPage = () => {
         })
       }
       if(result?.ok){
+        toast({
+          title:'Sign in successfully',
+          description: result.status,
+          variant: 'default'
+        })
         router.replace('/dashboard')
       }
 
@@ -90,6 +96,7 @@ const LoginPage = () => {
       </div>
       
     </div>
+    
     </div>
   )
 }
