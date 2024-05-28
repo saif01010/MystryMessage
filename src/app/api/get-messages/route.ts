@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 export async function GET(req:Request){
     await dbConnect();
     const session = await getServerSession(authOptions)
-    console.log(session);
+    // console.log(session);
     const user = session?.user as User;
     if(!user){
         return Response.json({success:false,message:'User not found'},{status:400})
@@ -24,8 +24,11 @@ export async function GET(req:Request){
             {$group:{_id:'$_id',messages:{$push:'$messages'}}},
 
         ])
-        if(!existUser || existUser.length === 0){
+        if(!existUser ){
             return Response.json({success:false,message:'Could Not Fetch Messages Maybe User does not exist'},{status:400})
+        }
+        if(existUser.length === 0){
+            return Response.json({success:false,message:"No Messages Available"},{status:300})
         }
         return Response.json({success:true,messages:existUser[0].messages},{status:200})
 
